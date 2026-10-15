@@ -1,7 +1,7 @@
 {
   "name": "rea-agents",
   "mcpName": "io.github.morluto/rea",
-  "version": "6.4.0",
+  "version": "6.5.0",
   "description": "Reverse engineer anything from your terminal or agent with one CLI and MCP server.",
   "license": "MIT",
   "repository": {
@@ -101,7 +101,7 @@
     "mcp-catalog:generate": "node scripts/check-dependency-install.mjs && node scripts/run-exclusive.mjs artifacts turbo run artifacts:mcp-catalog",
     "mcp-catalog:check": "node scripts/check-dependency-install.mjs && node scripts/run-exclusive.mjs artifacts turbo run mcp-catalog:check:built",
     "prebuild": "npm run deps:check",
-    "start": "node scripts/serve-portal.mjs",
+    "start": "node scripts/rea.mjs mcp",
     "vercel-build": "node scripts/vercel-build.mjs",
     "build": "node scripts/run-exclusive.mjs artifacts turbo run artifacts:skills --force",
     "precheck": "npm run deps:check",
@@ -129,7 +129,6 @@
     "jscpd": "node scripts/ci/static-check-report.mjs duplicates",
     "jscpd:details": "jscpd src/ tests/ --no-tips",
     "scan:todos": "node scripts/scan-todos.mjs",
-    "start": "node scripts/rea.mjs mcp",
     "test": "npm run test:with-build",
     "test:with-build": "npm run test:prepare && vitest run",
     "test:run": "vitest run",

@@ -101,6 +101,7 @@
     "mcp-catalog:generate": "node scripts/check-dependency-install.mjs && node scripts/run-exclusive.mjs artifacts turbo run artifacts:mcp-catalog",
     "mcp-catalog:check": "node scripts/check-dependency-install.mjs && node scripts/run-exclusive.mjs artifacts turbo run mcp-catalog:check:built",
     "prebuild": "npm run deps:check",
+    "start": "node scripts/serve-portal.mjs",
     "vercel-build": "node scripts/vercel-build.mjs",
     "build": "node scripts/run-exclusive.mjs artifacts turbo run artifacts:skills --force",
     "precheck": "npm run deps:check",

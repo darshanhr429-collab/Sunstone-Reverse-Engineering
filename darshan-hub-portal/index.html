@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunstone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="sunstone-layout">
+    
+    <!-- LEFT DARK NAVY SIDEBAR -->
+    <aside class="sidebar" id="sunstoneSidebar">
+      <!-- Sunstone Brand Header -->
+      <div class="brand-container">
+        <div class="brand-badge">S</div>
+        <span class="brand-text">Sunstone</span>
+      </div>
+
+      <!-- Main Navigation -->
+      <nav class="nav-list">
+        <a href="#home" class="nav-link active" data-tab="home">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span>Home</span>
+        </a>
+
+        <a href="#calendar" class="nav-link" data-tab="calendar">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span>Calendar</span>
+        </a>
+
+        <a href="#community" class="nav-link" data-tab="community">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <span>Community</span>
+        </a>
+
+        <a href="#jobs" class="nav-link" data-tab="jobs">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          <span>Jobs</span>
+        </a>
+
+        <a href="#saved-jobs" class="nav-link" data-tab="saved-jobs">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+          <span>Saved Jobs</span>
+        </a>
+
+        <a href="#attendance" class="nav-link" data-tab="attendance">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>My Attendance</span>
+        </a>
+
+        <a href="#subjects" class="nav-link" data-tab="subjects">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <span>My Subjects</span>
+        </a>
+
+        <a href="#fee-payment" class="nav-link" data-tab="fee-payment">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+          <span>Fee Payment</span>
+        </a>
+
+        <!-- PRIME SECTION -->
+        <div class="nav-category-header">PRIME</div>
+        <a href="#prime" class="nav-link" data-tab="prime">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          <span>Prime</span>
+        </a>
+
+        <!-- REFERRAL SECTION -->
+        <div class="nav-category-header">REFERRAL</div>
+        <a href="#refer-earn" class="nav-link" data-tab="refer-earn">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+          <span>Refer and Earn</span>
+        </a>
+
+        <a href="#my-rewards" class="nav-link" data-tab="my-rewards">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          <span>My Rewards</span>
+        </a>
+
+        <!-- FILES SECTION -->
+        <div class="nav-category-header">FILES</div>
+        <a href="#bonafide" class="nav-link" data-tab="bonafide">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          <span>Bonafide</span>
+        </a>
+
+        <a href="#offer-letter" class="nav-link" data-tab="offer-letter">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          <span>Offer Letter</span>
+        </a>
+      </nav>
+
+      <!-- User Profile Card in Sidebar Footer -->
+      <div class="sidebar-user-card" id="userCardMod">
+        <div class="user-avatar-rect">
+          <span class="user-initials">DG</span>
+        </div>
+        <div class="user-info-text">
+          <div class="user-display-name" id="sidebarUserName">Darshan God</div>
+          <div class="user-course-sub">Bachelor of Engineering</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN RIGHT CONTENT VIEWPORT -->
+    <main class="main-viewport">
+      
+      <!-- Top Subheader -->
+      <div class="top-breadcrumb-bar">
+        <span class="breadcrumb-current" id="currentBreadcrumb">Home</span>
+      </div>
+
+      <div class="viewport-scroll-area">
+        
+        <!-- 1. HOME TAB (EXACT SUNSTONE DASHBOARD) -->
+        <div class="tab-view active" id="view-home">
+          
+          <!-- Greeting Row -->
+          <div class="greeting-row">
+            <h1 class="welcome-heading">Hello, <span id="mainGreetingName">Darshan God</span> <span class="sun-icon">🌟</span></h1>
+            <div class="course-pill-badge">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+              <span>Bachelor of Engineering · 2025–29</span>
+            </div>
+          </div>
+
+          <!-- Mid Grid: Explore + Attendance -->
+          <div class="content-row">
+            
+            <!-- Left: Explore 8-Box Grid -->
+            <div class="explore-container">
+              <h2 class="card-title">Explore</h2>
+              
+              <div class="explore-grid">
+                <!-- 1. Builders -->
+                <div class="explore-box" data-explore="builders" onclick="window.sunstoneApp.openExploreView('builders')">
+                  <div class="box-icon-wrap icon-blue">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line><polyline points="7 8 10 10 7 12"></polyline><line x1="13" y1="12" x2="17" y2="12"></line></svg>
+                  </div>
+                  <span class="box-label">Builders</span>
+                </div>
+
+                <!-- 2. Ace Academy -->
+                <div class="explore-box" data-explore="ace-academy" onclick="window.sunstoneApp.openExploreView('ace-academy')">
+                  <div class="box-icon-wrap icon-gold">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                  </div>
+                  <span class="box-label">Ace Academy</span>
+                </div>
+
+                <!-- 3. Prime -->
+                <div class="explore-box" data-explore="prime" onclick="window.sunstoneApp.switchTab('prime')">
+                  <div class="box-icon-wrap icon-prime">
+                    <div class="prime-graphic">
+                      <span class="p-block-1"></span>
+                      <span class="p-block-2"></span>
+                    </div>
+                    <span class="prime-subtext">PRIME</span>
+                  </div>
+                  <span class="box-label">Prime</span>
+                </div>
+
+                <!-- 4. Library -->
+                <div class="explore-box" data-explore="library" onclick="window.sunstoneApp.openExploreView('library')">
+                  <div class="box-icon-wrap icon-play">
+                    <div class="play-circle-graphic">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-dasharray="3 3"></circle><polygon points="10 8 16 12 10 16 10 8" fill="#2563eb"></polygon></svg>
+                    </div>
+                  </div>
+                  <span class="box-label">Library</span>
+                </div>
+
+                <!-- 5. Calendar -->
+                <div class="explore-box" data-explore="calendar" onclick="window.sunstoneApp.switchTab('calendar')">
+                  <div class="box-icon-wrap">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  </div>
+                  <span class="box-label">Calendar</span>
+                </div>
+
+                <!-- 6. My Subjects -->
+                <div class="explore-box" data-explore="subjects" onclick="window.sunstoneApp.switchTab('subjects')">
+                  <div class="box-icon-wrap">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                  </div>
+                  <span class="box-label">My Subjects</span>
+                </div>
+
+                <!-- 7. Jobs -->
+                <div class="explore-box" data-explore="jobs" onclick="window.sunstoneApp.switchTab('jobs')">
+                  <div class="box-icon-wrap">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                  </div>
+                  <span class="box-label">Jobs</span>
+                </div>
+
+                <!-- 8. Help -->
+                <div class="explore-box" data-explore="help" onclick="window.sunstoneApp.openExploreView('help')">
+                  <div class="box-icon-wrap">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><circle cx="9" cy="10" r="1" fill="#2563eb"></circle><circle cx="12" cy="10" r="1" fill="#2563eb"></circle><circle cx="15" cy="10" r="1" fill="#2563eb"></circle></svg>
+                  </div>
+                  <span class="box-label">Help</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Right: Attendance Donut Card -->
+            <div class="attendance-container">
+              <div class="card-header-row">
+                <h2 class="card-title">Attendance</h2>
+                <a href="#attendance" class="view-all-link" onclick="window.sunstoneApp.switchTab('attendance')">View all &rarr;</a>
+              </div>
+
+              <div class="attendance-donut-wrap">
+                <!-- SVG Dual Arc Donut (74% Green, 26% Red) -->
+                <div class="donut-chart-svg">
+                  <svg viewBox="0 0 42 42" class="donut">
+                    <!-- Background Red Arc (26%) -->
+                    <circle class="donut-ring-absent" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#f43f5e" stroke-width="4"></circle>
+                    <!-- Foreground Green Arc (74%) -->
+                    <circle class="donut-ring-present" cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#10b981" stroke-width="4" stroke-dasharray="74 26" stroke-dashoffset="25"></circle>
+                  </svg>
+                  <div class="donut-center-text">
+                    <span class="donut-big-pct">74%</span>
+                    <span class="donut-sub-text">Present</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Attendance Stats Breakdown -->
+              <div class="attendance-legend">
+                <div class="legend-row">
+                  <div class="legend-label">
+                    <span class="dot-present"></span>
+                    <span>Present</span>
+                  </div>
+                  <span class="legend-val">125</span>
+                </div>
+
+                <div class="legend-row">
+                  <div class="legend-label">
+                    <span class="dot-absent"></span>
+                    <span>Absent</span>
+                  </div>
+                  <span class="legend-val">45</span>
+                </div>
+
+                <div class="legend-divider"></div>
+
+                <div class="legend-row total-row">
+                  <span class="legend-label">Total Classes</span>
+                  <span class="legend-val">170</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Row: Highlights & Events -->
+          <div class="content-row bottom-row">
+            
+            <!-- Highlights Section -->
+            <div class="highlights-container">
+              <h2 class="card-title">Highlights</h2>
+              
+              <div class="highlights-cards-row">
+                <!-- Banner 1: College Life Made Easy -->
+                <div class="highlight-banner banner-damini" onclick="window.sunstoneApp.openModal('College Life Made Easy', 'Campus Orientation, Productivity Hacks & Student Success with Mentor Damini Raichandani.')">
+                  <div class="banner-content">
+                    <h3 class="banner-heading">College Life<br/>Made Easy</h3>
+                    <div class="banner-speaker-badge">
+                      <span>Damini Raichandani</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Banner 2: Placement Spotlight -->
+                <div class="highlight-banner banner-placement" onclick="window.sunstoneApp.switchTab('jobs')">
+                  <div class="banner-content">
+                    <h3 class="banner-heading">Placement<br/>Spotlight</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Events Section -->
+            <div class="events-container">
+              <div class="card-header-row">
+                <h2 class="card-title">Events</h2>
+                <a href="#calendar" class="view-all-link" onclick="window.sunstoneApp.switchTab('calendar')">View all &rarr;</a>
+              </div>
+
+              <div class="event-card" onclick="window.sunstoneApp.switchTab('calendar')">
+                <div class="event-pill-row">
+                  <span class="pill-class">Class</span>
+                  <span class="pill-present">Present</span>
+                </div>
+                <div class="event-time">9:30 AM - 10:30 AM</div>
+                <div class="event-subject">Operating Systems</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- 2. EXPLORE: BUILDERS VIEW -->
+        <div class="tab-view" id="view-builders">
+          <div class="generic-panel-card">
+            <div class="panel-back-header">
+              <button class="back-btn" onclick="window.sunstoneApp.switchTab('home')">&larr; Back to Home</button>
+              <h2 class="card-title">Sunstone Builders Club</h2>
+            </div>
+            <p class="generic-p">Collaborative project incubators, open-source repositories, and developer hackathons for engineering students.</p>
+            
+            <div class="builders-grid">
+              <div class="builder-card">
+                <span class="builder-tag tag-ai">AI & Systems</span>
+                <h4>Distributed Microservices Engine</h4>
+                <p>High-throughput telemetry ingestion pipeline using Go & gRPC.</p>
+                <div class="builder-meta">
+                  <span>Lead: Darshan God</span>
+                  <button class="btn-sm-action" onclick="alert('Joined Builders Project!')">Join Project</button>
+                </div>
+              </div>
+
+              <div class="builder-card">
+                <span class="builder-tag tag-web">Web Architectures</span>
+                <h4>Autonomous Student Portal Core</h4>
+                <p>Flutter-inspired responsive SPA with local offline caching.</p>
+                <div class="builder-meta">
+                  <span>Lead: Darshan God</span>
+                  <button class="btn-sm-action" onclick="alert('Viewing repository!')">View Repo</button>
+                </div>
+              </div>
+
+              <div class="builder-card">
+                <span class="builder-tag tag-sec">Security</span>
+                <h4>Binary Decompiler & Analyzer</h4>
+                <p>REA static analysis bridge for inspecting bytecode architectures.</p>
+                <div class="builder-meta">
+                  <span>Contributors: 14</span>
+                  <button class="btn-sm-action" onclick="alert('Joined Hackathon!')">Contribute</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. EXPLORE: ACE ACADEMY VIEW -->
+        <div class="tab-view" id="view-ace-academy">
+          <div class="generic-panel-card">
+            <div class="panel-back-header">
+              <button class="back-btn" onclick="window.sunstoneApp.switchTab('home')">&larr; Back to Home</button>
+              <h2 class="card-title">Ace Academy Learning Hub</h2>
+            </div>
+            <p class="generic-p">Practice mock assessments, certification prep, and interactive coding sandboxes.</p>
+
+            <div class="ace-modules-list">
+              <div class="ace-card">
+                <div class="ace-icon">📘</div>
+                <div class="ace-info">
+                  <h4>Quantitative Aptitude & Logic (RITB Aptitude)</h4>
+                  <p>12 Modules · Speed math, series, graphs, and puzzle solving.</p>
+                  <div class="progress-bar-wrap"><div class="p-fill" style="width: 98%"></div></div>
+                </div>
+                <span class="ace-status">98.8% Cleared</span>
+              </div>
+
+              <div class="ace-card">
+                <div class="ace-icon">🎙️</div>
+                <div class="ace-info">
+                  <h4>SVAR Spoken English & Technical Interviews</h4>
+                  <p>Speech AI fluency evaluation, grammar, and boardroom speaking.</p>
+                  <div class="progress-bar-wrap"><div class="p-fill" style="width: 96%"></div></div>
+                </div>
+                <span class="ace-status">C1 Advanced</span>
+              </div>
+
+              <div class="ace-card">
+                <div class="ace-icon">💻</div>
+                <div class="ace-info">
+                  <h4>Operating Systems & Kernel Internals</h4>
+                  <p>Virtual memory, process scheduling, multi-threading, and file systems.</p>
+                  <div class="progress-bar-wrap"><div class="p-fill" style="width: 85%"></div></div>
+                </div>
+                <button class="btn-sm-action" onclick="alert('Launching interactive quiz!')">Start Practice</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. EXPLORE: DIGITAL LIBRARY VIEW -->
+        <div class="tab-view" id="view-library">
+          <div class="generic-panel-card">
+            <div class="panel-back-header">
+              <button class="back-btn" onclick="window.sunstoneApp.switchTab('home')">&larr; Back to Home</button>
+              <h2 class="card-title">Sunstone Digital Library</h2>
+            </div>
+            <p class="generic-p">Access lecture recordings, prescribed textbooks, faculty notes, and research papers.</p>
+
+            <div class="library-search-bar">
+              <input type="text" placeholder="Search 10,000+ textbooks, lecture slides, journals..." id="libSearchInput" />
+            </div>
+
+            <div class="library-books-grid">
+              <div class="book-card">
+                <div class="book-cover cover-blue">OS</div>
+                <div class="book-title">Operating System Concepts (10th Ed)</div>
+                <div class="book-author">Silberschatz, Galvin & Gagne</div>
+                <button class="btn-read" onclick="alert('Opening e-Book reader...')">Read Online</button>
+              </div>
+
+              <div class="book-card">
+                <div class="book-cover cover-green">NET</div>
+                <div class="book-title">Computer Networking: Top-Down Approach</div>
+                <div class="book-author">Kurose & Ross</div>
+                <button class="btn-read" onclick="alert('Opening e-Book reader...')">Read Online</button>
+              </div>
+
+              <div class="book-card">
+                <div class="book-cover cover-gold">DSA</div>
+                <div class="book-title">Introduction to Algorithms (CLRS)</div>
+                <div class="book-author">Cormen, Leiserson, Rivest, Stein</div>
+                <button class="btn-read" onclick="alert('Opening e-Book reader...')">Read Online</button>
+              </div>
+
+              <div class="book-card">
+                <div class="book-cover cover-purple">DB</div>
+                <div class="book-title">Database System Concepts (7th Ed)</div>
+                <div class="book-author">Silberschatz & Korth</div>
+                <button class="btn-read" onclick="alert('Opening e-Book reader...')">Read Online</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. EXPLORE: HELP VIEW -->
+        <div class="tab-view" id="view-help">
+          <div class="generic-panel-card">
+            <div class="panel-back-header">
+              <button class="back-btn" onclick="window.sunstoneApp.switchTab('home')">&larr; Back to Home</button>
+              <h2 class="card-title">Sunstone Student Helpdesk</h2>
+            </div>
+            <p class="generic-p">Have questions about your exams, fees, timetable, or attendance? We are here to help.</p>
+
+            <div class="help-sections-row">
+              <div class="help-card">
+                <h4>Academic Ticket Desk</h4>
+                <p>Submit questions regarding syllabus, internal assessments, and lab work.</p>
+                <button class="btn-sm-action" onclick="alert('Ticket desk opened!')">Raise a Ticket</button>
+              </div>
+
+              <div class="help-card">
+                <h4>Placement Support</h4>
+                <p>Assistance for drive registrations, resume approvals, and mock tests.</p>
+                <button class="btn-sm-action" onclick="alert('Contacting Placement Team!')">Contact Placement Officer</button>
+              </div>
+
+              <div class="help-card">
+                <h4>Fee & Scholarship Inquiries</h4>
+                <p>Support for fee payments, installments, and receipts.</p>
+                <button class="btn-sm-action" onclick="alert('Connecting to Finance Helpdesk!')">Speak with Accounts</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. CALENDAR TAB -->
+        <div class="tab-view" id="view-calendar">
+          <div class="generic-panel-card">
+            <h2 class="card-title">Academic Calendar & Daily Schedule</h2>
+            <div class="calendar-filter-bar">
+              <button class="cal-day-btn active">Today (Mon)</button>
+              <button class="cal-day-btn">Tue</button>
+              <button class="cal-day-btn">Wed</button>
+              <button class="cal-day-btn">Thu</button>
+              <button class="cal-day-btn">Fri</button>
+              <button class="cal-day-btn">Sat</button>
+            </div>
+
+            <div class="mock-schedule-list">
+              <div class="schedule-item">
+                <div class="sched-time">09:30 AM - 10:30 AM</div>
+                <div class="sched-sub">Operating Systems (CS-301) · Prof. Rajesh K · Room 402</div>
+                <span class="pill-present">Attended (Present)</span>
+              </div>
+              <div class="schedule-item">
+                <div class="sched-time">11:00 AM - 12:30 PM</div>
+                <div class="sched-sub">Computer Networks & Architecture (CS-302) · Prof. M. Swamy</div>
+                <span class="pill-present">Attended (Present)</span>
+              </div>
+              <div class="schedule-item">
+                <div class="sched-time">02:00 PM - 04:00 PM</div>
+                <div class="sched-sub">Advanced System Design & Reverse Engineering Lab</div>
+                <span class="pill-class">Upcoming Live Lab</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. COMMUNITY TAB -->
+        <div class="tab-view" id="view-community">
+          <div class="generic-panel-card">
+            <h2 class="card-title">Sunstone Student Community</h2>
+            <p class="generic-p">Connect with 30,000+ peers across Sunstone partner campuses. Join student interest clubs, tech hackathons, and placement study circles.</p>
+
+            <div class="community-feed">
+              <div class="feed-post">
+                <div class="post-header">
+                  <div class="post-avatar">DG</div>
+                  <div>
+                    <strong>Darshan God</strong>
+                    <small>RITB Campus, Bangalore · 2 hrs ago</small>
+                  </div>
+                </div>
+                <p class="post-body">Successfully cleared the Sunstone Aptitude & SVAR screening for the 2026 batch with 98.8th percentile! Looking forward to the upcoming corporate drives.</p>
+                <div class="post-actions">
+                  <button class="action-btn" onclick="alert('Liked post!')">❤️ 42 Likes</button>
+                  <button class="action-btn" onclick="alert('Opening comment box!')">💬 8 Comments</button>
+                </div>
+              </div>
+
+              <div class="feed-post">
+                <div class="post-header">
+                  <div class="post-avatar" style="background: #2563eb;">SC</div>
+                  <div>
+                    <strong>Sunstone Career Cell</strong>
+                    <small>Official Announcement · Yesterday</small>
+                  </div>
+                </div>
+                <p class="post-body">Deloitte USI and Amazon AWS have published initial shortlists for summer technical internships. Check your Jobs portal to enter the assessment rounds.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. JOBS TAB -->
+        <div class="tab-view" id="view-jobs">
+          <div class="generic-panel-card">
+            <div class="card-header-row">
+              <h2 class="card-title">Active Placement Drives & Jobs</h2>
+              <span class="status-pill status-green">Eligible for 4 Drives</span>
+            </div>
+            
+            <div class="jobs-list">
+              <div class="job-card">
+                <div class="job-left">
+                  <div class="company-badge deloitte-bg">D</div>
+                  <div>
+                    <div class="job-role">Software Development Engineer (SDE-1)</div>
+                    <div class="job-company">Deloitte USI · Bangalore / Hyderabad</div>
+                  </div>
+                </div>
+                <div class="job-pkg">₹ 12.5 LPA</div>
+                <button class="btn-apply" onclick="alert('Application submitted for Deloitte SDE-1!')">Apply Now</button>
+              </div>
+
+              <div class="job-card">
+                <div class="job-left">
+                  <div class="company-badge ms-bg">M</div>
+                  <div>
+                    <div class="job-role">Systems & Cloud Software Intern</div>
+                    <div class="job-company">Microsoft India · Bangalore</div>
+                  </div>
+                </div>
+                <div class="job-pkg">₹ 1.25 L / Month</div>
+                <button class="btn-apply" onclick="alert('Application submitted for Microsoft!')">Apply Now</button>
+              </div>
+
+              <div class="job-card">
+                <div class="job-left">
+                  <div class="company-badge amz-bg">A</div>
+                  <div>
+                    <div class="job-role">Cloud Support & Security Engineer</div>
+                    <div class="job-company">Amazon AWS · Bangalore</div>
+                  </div>
+                </div>
+                <div class="job-pkg">₹ 18.0 LPA</div>
+                <button class="btn-apply" onclick="alert('Application submitted for Amazon AWS!')">Apply Now</button>
+              </div>
+
+              <div class="job-card">
+                <div class="job-left">
+                  <div class="company-badge infy-bg">I</div>
+                  <div>
+                    <div class="job-role">Specialist Programmer (Power Programmer)</div>
+                    <div class="job-company">Infosys Technologies · Bangalore</div>
+                  </div>
+                </div>
+                <div class="job-pkg">₹ 9.5 LPA</div>
+                <button class="btn-apply" onclick="alert('Application submitted for Infosys!')">Apply Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. SAVED JOBS TAB -->
+        <div class="tab-view" id="view-saved-jobs">
+          <div class="generic-panel-card">
+            <h2 class="card-title">Saved Jobs</h2>
+            <p class="generic-p">You currently have bookmarked opportunities:</p>
+            <div class="jobs-list" style="margin-top: 14px;">
+              <div class="job-card">
+                <div class="job-left">
+                  <div class="company-badge deloitte-bg">D</div>
+                  <div>
+                    <div class="job-role">Software Development Engineer (SDE-1)</div>
+                    <div class="job-company">Deloitte USI · Bangalore</div>
+                  </div>
+                </div>
+                <button class="btn-apply" onclick="alert('Applying to Deloitte!')">Apply Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. MY ATTENDANCE TAB -->
+        <div class="tab-view" id="view-attendance">
+          <div class="generic-panel-card">
+            <div class="card-header-row">
+              <h2 class="card-title">My Subject Attendance Log</h2>
+              <span class="status-pill status-green">74% Overall (Eligible)</span>
+            </div>
+            
+            <table class="attendance-table">
+              <thead>
+                <tr>
+                  <th>Subject Code & Name</th>
+                  <th>Present</th>
+                  <th>Absent</th>
+                  <th>Total Classes</th>
+                  <th>Attendance %</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Operating Systems (CS-301)</strong></td>
+                  <td>32</td>
+                  <td>6</td>
+                  <td>38</td>
+                  <td><strong>84.2%</strong></td>
+                  <td><span class="pill-present">Eligible</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Computer Networks (CS-302)</strong></td>
+                  <td>28</td>
+                  <td>10</td>
+                  <td>38</td>
+                  <td><strong>73.6%</strong></td>
+                  <td><span class="pill-class">Need 1 Class</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Data Structures & Algorithms (CS-303)</strong></td>
+                  <td>35</td>
+                  <td>3</td>
+                  <td>38</td>
+                  <td><strong>92.1%</strong></td>
+                  <td><span class="pill-present">Excellent</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Database Management Systems (CS-304)</strong></td>
+                  <td>30</td>
+                  <td>8</td>
+                  <td>38</td>
+                  <td><strong>78.9%</strong></td>
+                  <td><span class="pill-present">Eligible</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 11. MY SUBJECTS TAB -->
+        <div class="tab-view" id="view-subjects">
+          <div class="generic-panel-card">
+            <h2 class="card-title">My Enrolled Subjects (Semester 3 & 4)</h2>
+            <div class="subjects-grid">
+              <div class="subject-card">
+                <h4>Operating Systems</h4>
+                <p>Code: CS-301 · 4 Credits · Prof. Rajesh K</p>
+                <div class="subj-meta">Syllabus: Process, Memory, I/O, File Systems</div>
+              </div>
+              <div class="subject-card">
+                <h4>Computer Networks</h4>
+                <p>Code: CS-302 · 4 Credits · Prof. M. Swamy</p>
+                <div class="subj-meta">Syllabus: OSI Model, TCP/IP, Routing Algorithms</div>
+              </div>
+              <div class="subject-card">
+                <h4>Database Management Systems</h4>
+                <p>Code: CS-303 · 4 Credits · Dr. Ananya Sharma</p>
+                <div class="subj-meta">Syllabus: SQL, Normalization, ACID, Indexing</div>
+              </div>
+              <div class="subject-card">
+                <h4>Design and Analysis of Algorithms</h4>
+                <p>Code: CS-304 · 4 Credits · Dr. Sneha Verma</p>
+                <div class="subj-meta">Syllabus: Dynamic Programming, Greedy, Graph Algorithms</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. FEE PAYMENT TAB -->
+        <div class="tab-view" id="view-fee-payment">
+          <div class="generic-panel-card">
+            <h2 class="card-title">Fee Ledger & Payment Center</h2>
+            <div class="fee-banner">
+              <div>
+                <strong>Semester Academic Tuition</strong>
+                <p>Total Installment: ₹ 1,25,000 · Status: Verified Active</p>
+              </div>
+              <button class="btn-pay-now" onclick="alert('Opening secure Payment Gateway for Sunstone Hub...')">Pay Now</button>
+            </div>
+
+            <h3 style="margin-top: 24px; font-size: 1.05rem;">Payment History</h3>
+            <div class="receipt-row">
+              <span>Receipt #SUN-RCP-2025-0012</span>
+              <span>Paid: ₹ 1,25,000</span>
+              <span class="pill-present">Successful</span>
+              <button class="btn-sm-action" onclick="alert('Downloading Receipt PDF...')">Download Receipt</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13. PRIME TAB -->
+        <div class="tab-view" id="view-prime">
+          <div class="generic-panel-card">
+            <h2 class="card-title">Sunstone Prime Privileges</h2>
+            <p class="generic-p">Exclusive career mentoring and placement boost for <strong>Darshan God</strong>.</p>
+            <div class="prime-features-list">
+              <div class="prime-feat-card">
+                <h4>1-on-1 Senior Industry Mentorship</h4>
+                <p>Book weekly mentoring sessions with leaders from Google, Amazon, and Microsoft.</p>
+              </div>
+              <div class="prime-feat-card">
+                <h4>Dedicated Resume Verification</h4>
+                <p>ATS-optimized professional portfolio reviewed by top hiring managers.</p>
+              </div>
+              <div class="prime-feat-card">
+                <h4>Priority Drive Access</h4>
+                <p>Direct fast-track interview passes for exclusive hiring partner drives.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 14. REFERRAL TABS -->
+        <div class="tab-view" id="view-refer-earn">
+          <div class="generic-panel-card">
+            <h2 class="card-title">Refer and Earn 🎁</h2>
+            <p class="generic-p">Share your referral link with aspiring students to earn rewards up to ₹ 10,000 upon admission verification.</p>
+            <div class="referral-box">
+              <span>Your Unique Referral Code:</span>
+              <div class="ref-code">SUN-DARSHAN-2026</div>
+              <button class="btn-sm-action" onclick="alert('Referral link copied to clipboard!')">Copy Link</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-view" id="view-my-rewards">
+          <div class="generic-panel-card">
+            <h2 class="card-title">My Rewards</h2>
+            <p class="generic-p">Track earned referral tokens and gift cards.</p>
+            <div class="no-rewards-box">
+              <span>🎁 You currently have 0 unclaimed rewards. Share your code to start earning!</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 15. FILES TABS -->
+        <div class="tab-view" id="view-bonafide">
+          <div class="generic-panel-card">
+            <h2 class="card-title">Bonafide Student Certificate</h2>
+            <p class="generic-p">Download digitally signed bonafide certificate for <strong>Darshan God</strong> (Bachelor of Engineering · RITB Bangalore Campus).</p>
+            <div style="margin-top: 18px;">
+              <button class="btn-sm-action" onclick="alert('Downloading signed Bonafide Certificate PDF...')">Download Official Bonafide (PDF)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-view" id="view-offer-letter">
+          <div class="generic-panel-card">
+            <h2 class="card-title">Provisional Offer Letter</h2>
+            <p class="generic-p">Official Sunstone Admission Offer Letter for <strong>Darshan God</strong> for Bachelor of Engineering (Session 2025–29).</p>
+            <div style="margin-top: 18px;">
+              <button class="btn-sm-action" onclick="alert('Downloading signed Admission Offer Letter PDF...')">Download Offer Letter (PDF)</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RED BOTTOM TOAST NOTIFICATION BAR (FROM REAL SCREENSHOT) -->
+      <div class="bottom-alert-bar" id="bottomAlertBar">
+        <div class="alert-content">
+          <span class="rupee-icon">₹</span>
+          <span class="alert-text">Late fees are adding up. Act fast</span>
+        </div>
+        <button class="btn-pay-alert" onclick="window.sunstoneApp.switchTab('fee-payment')">Pay Now</button>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- GENERIC MODAL -->
+  <div class="modal-layer" id="genericModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modalHeading">Details</h3>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

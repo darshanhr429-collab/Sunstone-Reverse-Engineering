@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Darshan HR - AI Engineering Dashboard. A comprehensive platform for AI model monitoring, analytics, code intelligence, and real-time system insights." />
+  <meta name="keywords" content="AI, Dashboard, Machine Learning, Analytics, Code Intelligence, Darshan HR, Sunstone" />
+  <meta name="author" content="Darshan HR" />
+  <meta property="og:title" content="Darshan HR - AI Engineering Dashboard" />
+  <meta property="og:description" content="Comprehensive AI model monitoring and analytics platform" />
+  <meta property="og:type" content="website" />
+  <title>Darshan HR — AI Engineering Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <link rel="stylesheet" href="styles/components.css" />
+  <link rel="stylesheet" href="styles/animations.css" />
+  <link rel="stylesheet" href="styles/charts.css" />
+  <link rel="stylesheet" href="styles/dark-theme.css" />
+</head>
+<body class="dark-mode" id="app-body">
+
+  <!-- Ambient Background -->
+  <div class="ambient-bg" id="ambientBg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+    <canvas id="particleCanvas" class="particle-canvas"></canvas>
+  </div>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-content">
+      <div class="loading-logo">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="30" stroke="url(#loadGrad)" stroke-width="2" stroke-dasharray="8 4"/>
+          <path d="M20 32 L28 24 L36 32 L28 40 Z" fill="url(#loadGrad)"/>
+          <path d="M32 20 L40 28 L32 36 L24 28 Z" fill="url(#loadGrad2)" opacity="0.6"/>
+          <defs>
+            <linearGradient id="loadGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#6366f1"/>
+              <stop offset="100%" style="stop-color:#8b5cf6"/>
+            </linearGradient>
+            <linearGradient id="loadGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#06b6d4"/>
+              <stop offset="100%" style="stop-color:#3b82f6"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="loading-text">
+        <span class="loading-title">AI Command Center</span>
+        <span class="loading-subtitle">Initializing neural networks...</span>
+      </div>
+      <div class="loading-bar-container">
+        <div class="loading-bar" id="loadingBar"></div>
+      </div>
+      <div class="loading-steps" id="loadingSteps">
+        <span class="loading-step active">Connecting to AI models</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Shell -->
+  <div class="app-shell" id="appShell" style="display:none">
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-logo">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="8" fill="url(#brandGrad)"/>
+            <path d="M10 16 L16 10 L22 16 L16 22 Z" fill="white" opacity="0.9"/>
+            <defs>
+              <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#6366f1"/>
+                <stop offset="100%" style="stop-color:#8b5cf6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Darshan AI</span>
+          <span class="brand-tagline">Command Center</span>
+        </div>
+        <button class="sidebar-toggle-btn" id="sidebarToggle" aria-label="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 4h12v1.5H2zm0 5h12v1.5H2zm0 5h12v1.5H2z"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="sidebar-search">
+        <div class="search-input-wrap">
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+            <circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            <path d="M9.5 9.5L12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <input type="text" class="search-input" id="navSearch" placeholder="Search..." aria-label="Search navigation" />
+          <kbd class="search-kbd">Ctrl+K</kbd>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-section">
+          <span class="nav-section-title">Core</span>
+          <ul class="nav-list" role="list">
+            <li class="nav-item">
+              <a href="#overview" class="nav-link active" id="nav-overview" data-page="overview" role="menuitem">
+                <span class="nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <rect x="2" y="2" width="6" height="6" rx="1.5" fill="currentColor"/>
+                    <rect x="10" y="2" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.6"/>
+                    <rect x="2" y="10" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.6"/>
+                    <rect x="10" y="10" width="6" height="6" rx="1.5" fill="currentColor" opacity="0.8"/>
+                  </svg>
+                </span>
+                <span class="nav-label">Overview</span>
+                <span class="nav-badge" id="badge-overview">Live</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#models" class="nav-link" id="nav-models" data-page="models" role="menuitem">
+                <span class="nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <circle cx="9" cy="9" r="3" fill="currentColor"/>
+                    <path d="M9 2v2M9 14v2M2 9h2M14 9h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span class="nav-label">AI Models</span>
+                <span class="nav-badge nav-badge-count">4</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#analytics" class="nav-link" id="nav-analytics" data-page="analytics" role="menuitem">
+                <span class="nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M3 15 L7 9 L11 12 L15 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <circle cx="7" cy="9" r="1.5" fill="currentColor"/>
+                    <circle cx="11" cy="12" r="1.5" fill="currentColor"/>
+                    <circle cx="15" cy="5" r="1.5" fill="currentColor"/>
+                  </svg>
+                </span>
+                <span class="nav-label">Analytics</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#code" class="nav-link" id="nav-code" data-page="code" role="menuitem">
+                <span class="nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M6 6L2 9l4 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <path d="M12 6l4 3-4 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <path d="M10 3l-2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span class="nav-label">Code Intel</span>
+                <span class="nav-badge nav-badge-new">New</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#datasets" class="nav-link" id="nav-datasets" data-page="datasets" role="menuitem">
+                <span class="nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <ellipse cx="9" cy="5" rx="6" ry="2.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <path d="M3 5v4c0 1.38 2.69 2.5 6 2.5s6-1.12 6-2.5V5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <path d="M3 9v4c0 1.38 2.69 2.5 6 2.5s6-1.12 6-2.5V9" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                  </svg>
+                </span>
+                <span class="nav-label">Datasets</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <span class="nav-section-title">Operations</span>
+          <ul class="nav-list" role="list">
+            <li class="nav-item">
+              <a href="#experiments" class="nav-link" id="nav-experiments" data-page="experiments" role="menuitem">
+                <span class="nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M7 2v7L3 15h12l-4-6V2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <path d="M6 2h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span class="nav-label">Experiments</span>
+                <span class="nav-badge nav-badge-count">12</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#deployments" class="nav-link" id="nav-deployments" data-page="deployments" role="menuitem">
+                <span class="nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M9 2 L16 6 L16 12 L9 16 L2 12 L2 6 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+                    <circle cx="9" cy="9" r="2" fill="currentColor"/>
+                  </svg>
+                </span>
+                <span class="nav-label">Deployments</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#monitoring" class="nav-link" id="nav-monitoring" data-page="monitoring" role="menuitem">
+                <span class="nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <rect x="2" y="4" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <path d="M6 9l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="nav-label">Monitoring</span>
+                <span class="nav-status-dot status-green"></span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#pipelines" class="nav-link" id="nav-pipelines" data-page="pipelines" role="menuitem">
+                <span class="nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="4" cy="9" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <circle cx="14" cy="9" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <path d="M6 9h6" stroke="currentColor" stroke-width="1.5"/>
+                    <circle cx="9" cy="4" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <circle cx="9" cy="14" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                  </svg>
+                </span>
+                <span class="nav-label">Pipelines</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <span class="nav-section-title">Settings</span>
+          <ul class="nav-list" role="list">
+            <li class="nav-item">
+              <a href="#settings" class="nav-link" id="nav-settings" data-page="settings" role="menuitem">
+                <span class="nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="9" r="2.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <path d="M9 2v1.5M9 14.5V16M2 9h1.5M14.5 9H16M4.1 4.1l1.06 1.06M12.84 12.84l1.06 1.06M4.1 13.9l1.06-1.06M12.84 5.16l1.06-1.06" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </span>
+                <span class="nav-label">Settings</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#team" class="nav-link" id="nav-team" data-page="team" role="menuitem">
+                <span class="nav-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <circle cx="7" cy="6" r="2.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <path d="M2 15c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                    <circle cx="13" cy="6" r="2" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.6"/>
+                    <path d="M15 14c0-2.21-1.34-4.11-3.24-4.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.6" fill="none"/>
+                  </svg>
+                </span>
+                <span class="nav-label">Team</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-status">
+          <div class="status-row">
+            <span class="status-label">API Status</span>
+            <span class="status-value status-ok">
+              <span class="pulse-dot"></span>
+              Operational
+            </span>
+          </div>
+          <div class="status-row">
+            <span class="status-label">GPU Cluster</span>
+            <span class="status-value status-ok">
+              <span class="pulse-dot"></span>
+              8/8 Online
+            </span>
+          </div>
+        </div>
+        <div class="user-profile-mini">
+          <div class="avatar avatar-gradient">DH</div>
+          <div class="user-info-mini">
+            <span class="user-name-mini">Darshan HR</span>
+            <span class="user-role-mini">AI Engineer</span>
+          </div>
+          <button class="user-menu-btn" id="userMenuBtn" aria-label="User menu">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M8 3a1 1 0 100 2 1 1 0 000-2zM8 7a1 1 0 100 2 1 1 0 000-2zM8 11a1 1 0 100 2 1 1 0 000-2z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content" id="mainContent" role="main">
+
+      <!-- Top Header Bar -->
+      <header class="topbar" id="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M3 6h14v1.5H3zm0 6h14v1.5H3z"/>
+            </svg>
+          </button>
+          <div class="page-breadcrumb" id="pageBreadcrumb">
+            <span class="breadcrumb-home">Darshan AI</span>
+            <span class="breadcrumb-sep">›</span>
+            <span class="breadcrumb-current" id="breadcrumbCurrent">Overview</span>
+          </div>
+        </div>
+        <div class="topbar-center">
+          <div class="live-clock" id="liveClock">
+            <span class="clock-time" id="clockTime">00:00:00</span>
+            <span class="clock-date" id="clockDate">Loading...</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="topbar-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor" id="themeIcon">
+              <path d="M9 1a8 8 0 100 16A8 8 0 009 1zm0 14.5A6.5 6.5 0 019 2.5v13a6.5 6.5 0 010-13z"/>
+            </svg>
+          </button>
+          <button class="topbar-btn" id="notifBtn" aria-label="Notifications" title="Notifications">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M9 2a5.5 5.5 0 00-5.5 5.5v2L2 11.5h14l-1.5-2v-2A5.5 5.5 0 009 2z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+              <path d="M7 14c0 1.1.9 2 2 2s2-.9 2-2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+            </svg>
+            <span class="notif-badge" id="notifBadge">3</span>
+          </button>
+          <button class="topbar-btn" id="fullscreenBtn" aria-label="Fullscreen" title="Toggle fullscreen">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M2 6V2h4M12 2h4v4M16 12v4h-4M6 16H2v-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="topbar-user" id="topbarUser">
+            <div class="avatar avatar-sm avatar-gradient">DH</div>
+            <span class="topbar-username">Darshan HR</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Pages Container -->
+      <div class="pages-container" id="pagesContainer">
+
+        <!-- PAGE: OVERVIEW -->
+        <section class="page active" id="page-overview" data-page="overview">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1 class="page-title">Good evening, Darshan <span class="wave-emoji">👋</span></h1>
+              <p class="page-subtitle">Here's what's happening with your AI models today.</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-ghost" id="refreshOverview" aria-label="Refresh overview">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M2 8A6 6 0 0114 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M14 4l0 4-4 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Refresh
+              </button>
+              <button class="btn btn-primary" id="newProjectBtn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M8 2a1 1 0 011 1v4h4a1 1 0 010 2H9v4a1 1 0 01-2 0V9H3a1 1 0 010-2h4V3a1 1 0 011-1z"/>
+                </svg>
+                New Experiment
+              </button>
+            </div>
+          </div>
+          <div class="stats-grid" id="statsGrid"></div>
+          <div class="charts-row">
+            <div class="chart-card chart-card-wide" id="requestsChartCard">
+              <div class="chart-card-header">
+                <div>
+                  <h3 class="chart-title">Request Volume</h3>
+                  <p class="chart-subtitle">API calls per hour over the last 7 days</p>
+                </div>
+                <div class="chart-controls">
+                  <div class="time-range-selector" role="group" aria-label="Time range">
+                    <button class="time-btn" data-range="1d">1D</button>
+                    <button class="time-btn active" data-range="7d">7D</button>
+                    <button class="time-btn" data-range="30d">30D</button>
+                    <button class="time-btn" data-range="90d">90D</button>
+                  </div>
+                </div>
+              </div>
+              <div class="chart-body">
+                <canvas id="requestsChart" width="700" height="220" aria-label="Request volume chart"></canvas>
+              </div>
+            </div>
+            <div class="chart-card" id="modelPieCard">
+              <div class="chart-card-header">
+                <div>
+                  <h3 class="chart-title">Model Distribution</h3>
+                  <p class="chart-subtitle">Usage by model type</p>
+                </div>
+              </div>
+              <div class="chart-body chart-body-centered">
+                <canvas id="modelPieChart" width="200" height="200" aria-label="Model distribution chart"></canvas>
+              </div>
+              <div class="pie-legend" id="pieLegend"></div>
+            </div>
+          </div>
+          <div class="detail-row">
+            <div class="detail-card" id="modelsActivityCard">
+              <div class="detail-card-header">
+                <h3 class="detail-title">Active Models</h3>
+                <a href="#models" class="detail-link" data-page="models">View all</a>
+              </div>
+              <div class="models-list" id="activeModelsList"></div>
+            </div>
+            <div class="detail-card" id="recentEventsCard">
+              <div class="detail-card-header">
+                <h3 class="detail-title">Recent Events</h3>
+                <button class="detail-link" id="clearEventsBtn">Clear all</button>
+              </div>
+              <div class="events-feed" id="eventsFeed"></div>
+            </div>
+            <div class="detail-card" id="gpuStatusCard">
+              <div class="detail-card-header">
+                <h3 class="detail-title">GPU Cluster</h3>
+                <span class="status-badge status-green-light">All Online</span>
+              </div>
+              <div class="gpu-grid" id="gpuGrid"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PAGE: AI MODELS -->
+        <section class="page" id="page-models" data-page="models">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1 class="page-title">AI Models</h1>
+              <p class="page-subtitle">Manage and monitor your deployed AI models</p>
+            </div>
+            <div class="page-actions">
+              <div class="search-bar">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" class="search-bar-icon">
+                  <circle cx="6" cy="6" r="4.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                  <path d="M9.5 9.5L12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <input type="text" class="search-bar-input" id="modelSearchInput" placeholder="Search models..." aria-label="Search models" />
+              </div>
+              <button class="btn btn-primary" id="deployModelBtn">Deploy Model</button>
+            </div>
+          </div>
+          <div class="models-grid" id="modelsGrid"></div>
+        </section>
+
+        <!-- PAGE: ANALYTICS -->
+        <section class="page" id="page-analytics" data-page="analytics">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1 class="page-title">Analytics</h1>
+              <p class="page-subtitle">Deep dive into your AI model performance data</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-ghost">Export CSV</button>
+              <button class="btn btn-ghost">Export PDF</button>
+            </div>
+          </div>
+          <div class="analytics-grid">
+            <div class="analytics-chart-card analytics-full">
+              <div class="chart-card-header">
+                <h3 class="chart-title">Performance Over Time</h3>
+              </div>
+              <canvas id="analyticsLineChart" width="900" height="280" aria-label="Analytics line chart"></canvas>
+            </div>
+            <div class="analytics-chart-card">
+              <div class="chart-card-header">
+                <h3 class="chart-title">Error Distribution</h3>
+              </div>
+              <canvas id="errorBarChart" width="380" height="220" aria-label="Error distribution chart"></canvas>
+            </div>
+            <div class="analytics-chart-card">
+              <div class="chart-card-header">
+                <h3 class="chart-title">Latency Heatmap</h3>
+              </div>
+              <div class="heatmap-container" id="latencyHeatmap"></div>
+            </div>
+            <div class="analytics-chart-card analytics-full">
+              <div class="chart-card-header">
+                <h3 class="chart-title">Token Usage Breakdown</h3>
+              </div>
+              <canvas id="tokenUsageChart" width="900" height="200" aria-label="Token usage chart"></canvas>
+            </div>
+          </div>
+        </section>
+
+        <!-- PAGE: CODE INTELLIGENCE -->
+        <section class="page" id="page-code" data-page="code">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1 class="page-title">Code Intelligence</h1>
+              <p class="page-subtitle">AI-powered code analysis, reverse engineering, and insights</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-ghost">Import Repo</button>
+              <button class="btn btn-primary" id="runAnalysisBtn">Run Analysis</button>
+            </div>
+          </div>
+          <div class="code-intel-layout">
+            <div class="code-file-tree" id="codeFileTree">
+              <div class="file-tree-header">
+                <h4 class="file-tree-title">Repository</h4>
+                <span class="file-tree-name">sunstone-reverse-engineering</span>
+              </div>
+              <div class="file-tree-body" id="fileTreeBody"></div>
+            </div>
+            <div class="code-editor-panel" id="codeEditorPanel">
+              <div class="code-editor-tabs" id="codeEditorTabs"></div>
+              <div class="code-editor-content" id="codeEditorContent">
+                <pre class="code-display" id="codeDisplay"><code id="codeHighlight"></code></pre>
+              </div>
+            </div>
+            <div class="code-insights-panel" id="codeInsightsPanel">
+              <div class="insights-header">
+                <h4>AI Insights</h4>
+                <span class="insight-model-badge"><span class="pulse-dot"></span>Gemini 1.5 Pro</span>
+              </div>
+              <div class="insights-body" id="insightsBody">
+                <div class="insight-item insight-info">
+                  <div class="insight-icon">💡</div>
+                  <div class="insight-text">
+                    <strong>Architecture Pattern</strong>
+                    <p>Layered architecture detected: Domain to Application to Infrastructure to CLI/MCP adapters. Dependencies flow inward.</p>
+                  </div>
+                </div>
+                <div class="insight-item insight-success">
+                  <div class="insight-icon">✅</div>
+                  <div class="insight-text">
+                    <strong>Type Safety</strong>
+                    <p>Strict TypeScript with Result types and tagged error algebra for predictable error handling.</p>
+                  </div>
+                </div>
+                <div class="insight-item insight-warning">
+                  <div class="insight-icon">⚠️</div>
+                  <div class="insight-text">
+                    <strong>Test Coverage</strong>
+                    <p>Integration tests cover main workflows but simulation-based tests don't verify real-provider behavior.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="insights-query">
+                <textarea class="insights-input" id="insightsInput" placeholder="Ask AI about this code..." rows="3" aria-label="Ask AI"></textarea>
+                <button class="btn btn-primary btn-sm" id="askAIBtn">Ask AI</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PAGE: DATASETS -->
+        <section class="page" id="page-datasets" data-page="datasets">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1 class="page-title">Datasets</h1>
+              <p class="page-subtitle">Manage training data, versioning, and lineage</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-ghost">Upload</button>
+              <button class="btn btn-primary">Create Dataset</button>
+            </div>
+          </div>
+          <div class="datasets-list" id="datasetsList"></div>
+        </section>
+
+        <!-- PAGE: EXPERIMENTS -->
+        <section class="page" id="page-experiments" data-page="experiments">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1 class="page-title">Experiments</h1>
+              <p class="page-subtitle">Track, compare, and reproduce ML experiments</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-ghost">Import</button>
+              <button class="btn btn-primary" id="newExperimentBtn">New Experiment</button>
+            </div>
+          </div>
+          <div class="experiments-table-wrap">
+            <table class="data-table" id="experimentsTable" aria-label="Experiments table">
+              <thead>
+                <tr>
+                  <th scope="col">Experiment</th>
+                  <th scope="col">Model</th>
+                  <th scope="col">Dataset</th>
+                  <th scope="col">Accuracy</th>
+                  <th scope="col">F1 Score</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="experimentsBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- PAGE: MONITORING -->
+        <section class="page" id="page-monitoring" data-page="monitoring">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1 class="page-title">Monitoring</h1>
+              <p class="page-subtitle">Real-time system health and alerting</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-ghost">Configure Alerts</button>
+              <button class="btn btn-primary">Add Monitor</button>
+            </div>
+          </div>
+          <div class="monitoring-grid" id="monitoringGrid">
+            <div class="monitor-card" id="monitor-cpu">
+              <div class="monitor-header">
+                <h4 class="monitor-title">CPU Usage</h4>
+                <span class="monitor-value" id="cpuValue">0%</span>
+              </div>
+              <div class="monitor-gauge-wrap">
+                <canvas class="gauge-canvas" data-id="gauge-cpu" width="160" height="100"></canvas>
+              </div>
+              <div class="monitor-stats-row">
+                <span class="monitor-stat">P95: <strong>72%</strong></span>
+                <span class="monitor-stat">Max: <strong>89%</strong></span>
+                <span class="monitor-stat">Cores: <strong>32</strong></span>
+              </div>
+            </div>
+            <div class="monitor-card" id="monitor-mem">
+              <div class="monitor-header">
+                <h4 class="monitor-title">Memory Usage</h4>
+                <span class="monitor-value" id="memValue">0%</span>
+              </div>
+              <div class="monitor-gauge-wrap">
+                <canvas class="gauge-canvas" data-id="gauge-mem" width="160" height="100"></canvas>
+              </div>
+              <div class="monitor-stats-row">
+                <span class="monitor-stat">Used: <strong>48.2 GB</strong></span>
+                <span class="monitor-stat">Total: <strong>128 GB</strong></span>
+              </div>
+            </div>
+            <div class="monitor-card" id="monitor-gpu">
+              <div class="monitor-header">
+                <h4 class="monitor-title">GPU Utilization</h4>
+                <span class="monitor-value" id="gpuValue">0%</span>
+              </div>
+              <div class="monitor-gauge-wrap">
+                <canvas class="gauge-canvas" data-id="gauge-gpu" width="160" height="100"></canvas>
+              </div>
+              <div class="monitor-stats-row">
+                <span class="monitor-stat">VRAM: <strong>61.4 GB</strong></span>
+                <span class="monitor-stat">Temp: <strong>74 deg C</strong></span>
+              </div>
+            </div>
+            <div class="monitor-card" id="monitor-net">
+              <div class="monitor-header">
+                <h4 class="monitor-title">Network I/O</h4>
+                <span class="monitor-value" id="netValue">0 MB/s</span>
+              </div>
+              <div class="chart-body">
+                <canvas id="networkChart" width="300" height="100" aria-label="Network I/O chart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="alerts-section" id="alertsSection">
+            <div class="section-header">
+              <h3 class="section-title">Active Alerts</h3>
+              <span class="alert-count-badge" id="alertCountBadge">0 active</span>
+            </div>
+            <div class="alerts-list" id="alertsList"></div>
+          </div>
+        </section>
+
+        <!-- PAGE: DEPLOYMENTS -->
+        <section class="page" id="page-deployments" data-page="deployments">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1 class="page-title">Deployments</h1>
+              <p class="page-subtitle">Manage production and staging model deployments</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-ghost">Rollback</button>
+              <button class="btn btn-primary">Deploy</button>
+            </div>
+          </div>
+          <div class="deployments-list" id="deploymentsList"></div>
+        </section>
+
+        <!-- PAGE: PIPELINES -->
+        <section class="page" id="page-pipelines" data-page="pipelines">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1 class="page-title">ML Pipelines</h1>
+              <p class="page-subtitle">Automated training and inference pipelines</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary">New Pipeline</button>
+            </div>
+          </div>
+          <div class="pipelines-canvas-wrap" id="pipelinesCanvasWrap">
+            <canvas id="pipelineCanvas" width="900" height="500" aria-label="Pipeline visualization"></canvas>
+          </div>
+        </section>
+
+        <!-- PAGE: SETTINGS -->
+        <section class="page" id="page-settings" data-page="settings">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1 class="page-title">Settings</h1>
+              <p class="page-subtitle">Configure your AI Command Center preferences</p>
+            </div>
+          </div>
+          <div class="settings-layout">
+            <div class="settings-sidebar">
+              <nav class="settings-nav" role="navigation" aria-label="Settings sections">
+                <a href="#settings-general" class="settings-nav-link active" data-settings="general">General</a>
+                <a href="#settings-api" class="settings-nav-link" data-settings="api">API Keys</a>
+                <a href="#settings-models" class="settings-nav-link" data-settings="models">Model Config</a>
+                <a href="#settings-notifications" class="settings-nav-link" data-settings="notifications">Notifications</a>
+                <a href="#settings-security" class="settings-nav-link" data-settings="security">Security</a>
+                <a href="#settings-billing" class="settings-nav-link" data-settings="billing">Billing</a>
+              </nav>
+            </div>
+            <div class="settings-content" id="settingsContent">
+              <div class="settings-section active" data-settings="general">
+                <h2 class="settings-section-title">General Settings</h2>
+                <div class="settings-form">
+                  <div class="form-group">
+                    <label class="form-label" for="displayName">Display Name</label>
+                    <input type="text" id="displayName" class="form-input" value="Darshan HR" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="userEmail">Email</label>
+                    <input type="email" id="userEmail" class="form-input" value="darshanhr429@gmail.com" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="orgName">Organization</label>
+                    <input type="text" id="orgName" class="form-input" value="Sunstone / RITB" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="timezone">Timezone</label>
+                    <select id="timezone" class="form-input" aria-label="Timezone">
+                      <option value="Asia/Kolkata" selected>Asia/Kolkata (IST)</option>
+                      <option value="UTC">UTC</option>
+                      <option value="America/New_York">America/New_York</option>
+                    </select>
+                  </div>
+                  <div class="form-actions">
+                    <button class="btn btn-primary" id="saveGeneralSettings">Save Changes</button>
+                    <button class="btn btn-ghost">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PAGE: TEAM -->
+        <section class="page" id="page-team" data-page="team">
+          <div class="page-header">
+            <div class="page-title-group">
+              <h1 class="page-title">Team</h1>
+              <p class="page-subtitle">Manage collaborators and access control</p>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-primary">Invite Member</button>
+            </div>
+          </div>
+          <div class="team-grid" id="teamGrid"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Notifications Drawer -->
+  <div class="notifications-drawer" id="notificationsDrawer" role="dialog" aria-label="Notifications">
+    <div class="drawer-header">
+      <h3 class="drawer-title">Notifications</h3>
+      <div class="drawer-actions">
+        <button class="btn-text">Mark all read</button>
+        <button class="drawer-close-btn" id="closeNotifDrawer" aria-label="Close notifications">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M4.5 4.5l7 7M11.5 4.5l-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="notifications-list" id="notificationsList"></div>
+  </div>
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Modal">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">Modal</h3>
+        <button class="modal-close-btn" id="modalClose" aria-label="Close modal">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M4.5 4.5l7 7M11.5 4.5l-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer" id="modalFooter">
+        <button class="btn btn-ghost" id="modalCancel">Cancel</button>
+        <button class="btn btn-primary" id="modalConfirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer" role="region" aria-live="polite" aria-label="Notifications"></div>
+
+  <!-- Command Palette -->
+  <div class="command-palette-overlay" id="commandPaletteOverlay" role="dialog" aria-modal="true" aria-label="Command palette">
+    <div class="command-palette" id="commandPalette">
+      <div class="command-input-wrap">
+        <svg class="command-icon" width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+          <circle cx="8" cy="8" r="5.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M13 13l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input type="text" class="command-input" id="commandInput" placeholder="Type a command or search..." aria-label="Command palette input" />
+        <kbd class="command-esc">ESC</kbd>
+      </div>
+      <div class="command-results" id="commandResults"></div>
+      <div class="command-footer">
+        <span><kbd>Arrow Up/Down</kbd> navigate</span>
+        <span><kbd>Enter</kbd> select</span>
+        <span><kbd>ESC</kbd> close</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/pages.js"></script>
+  <script src="js/pages/telemetry.js"></script>
+  <script src="js/pages/clusters.js"></script>
+  <script src="js/pages/security.js"></script>
+  <script src="js/pages/training.js"></script>
+  <script src="js/pages/datasets.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

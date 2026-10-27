@@ -1,0 +1,702 @@
+/* ==========================================================================
+   CHARTS CSS — Custom canvas chart styles and chart-specific components
+   AI Engineering Command Center
+   ========================================================================== */
+
+/* ----------------------------------------
+   CHART WRAPPERS
+   ---------------------------------------- */
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.chart-wrapper canvas {
+  max-width: 100%;
+}
+
+/* ----------------------------------------
+   CHART TOOLTIP
+   ---------------------------------------- */
+.chart-tooltip {
+  position: absolute;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-hover);
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+  pointer-events: none;
+  z-index: var(--z-tooltip);
+  box-shadow: var(--shadow-lg);
+  min-width: 140px;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  opacity: 0;
+  transform: translateY(4px) scale(0.97);
+}
+
+.chart-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.chart-tooltip-title {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.chart-tooltip-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  font-size: var(--text-xs);
+}
+
+.chart-tooltip-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-secondary);
+}
+
+.chart-tooltip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.chart-tooltip-value {
+  font-weight: 700;
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
+
+.chart-tooltip-separator {
+  height: 1px;
+  background: var(--color-border);
+  margin: var(--space-xs) 0;
+}
+
+.chart-tooltip-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-top: 2px;
+}
+
+/* ----------------------------------------
+   AXIS LABELS
+   ---------------------------------------- */
+.chart-axis-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-axis-title {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ----------------------------------------
+   CHART CROSSHAIR
+   ---------------------------------------- */
+.chart-crosshair {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.chart-crosshair-line-x {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(99, 102, 241, 0.4);
+  border-left: 1px dashed rgba(99, 102, 241, 0.4);
+}
+
+.chart-crosshair-line-y {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  border-top: 1px dashed rgba(99, 102, 241, 0.3);
+}
+
+.chart-crosshair-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  border: 2px solid var(--color-bg);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.5);
+}
+
+/* ----------------------------------------
+   MINI SPARKLINE
+   ---------------------------------------- */
+.sparkline-wrap {
+  position: relative;
+  width: 100%;
+  height: 40px;
+}
+
+.sparkline-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.sparkline-line {
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sparkline-area {
+  opacity: 0.15;
+}
+
+.sparkline-dot {
+  r: 2.5;
+  stroke-width: 1.5;
+}
+
+/* Colored sparklines */
+.sparkline-purple .sparkline-line { stroke: #6366f1; }
+.sparkline-purple .sparkline-area { fill: #6366f1; }
+.sparkline-purple .sparkline-dot  { stroke: #6366f1; fill: #6366f1; }
+
+.sparkline-emerald .sparkline-line { stroke: #10b981; }
+.sparkline-emerald .sparkline-area { fill: #10b981; }
+.sparkline-emerald .sparkline-dot  { stroke: #10b981; fill: #10b981; }
+
+.sparkline-amber .sparkline-line { stroke: #f59e0b; }
+.sparkline-amber .sparkline-area { fill: #f59e0b; }
+.sparkline-amber .sparkline-dot  { stroke: #f59e0b; fill: #f59e0b; }
+
+.sparkline-rose .sparkline-line { stroke: #ef4444; }
+.sparkline-rose .sparkline-area { fill: #ef4444; }
+.sparkline-rose .sparkline-dot  { stroke: #ef4444; fill: #ef4444; }
+
+.sparkline-cyan .sparkline-line { stroke: #06b6d4; }
+.sparkline-cyan .sparkline-area { fill: #06b6d4; }
+.sparkline-cyan .sparkline-dot  { stroke: #06b6d4; fill: #06b6d4; }
+
+/* ----------------------------------------
+   GAUGE CHART
+   ---------------------------------------- */
+.gauge-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gauge-canvas {
+  display: block;
+}
+
+.gauge-label {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.gauge-value {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+  line-height: 1;
+}
+
+.gauge-unit {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  display: block;
+  margin-top: 2px;
+}
+
+/* ----------------------------------------
+   DONUT CHART
+   ---------------------------------------- */
+.donut-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.donut-center {
+  position: absolute;
+  text-align: center;
+  pointer-events: none;
+}
+
+.donut-center-value {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.donut-center-label {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  display: block;
+  margin-top: 3px;
+}
+
+/* ----------------------------------------
+   BAR CHART CUSTOM
+   ---------------------------------------- */
+.bar-chart-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.bar-chart-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.bar-chart-label {
+  width: 80px;
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  text-align: right;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bar-chart-track {
+  flex: 1;
+  height: 20px;
+  background: var(--color-surface-elevated);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-chart-fill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  background: var(--gradient-brand);
+  transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 6px;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: white;
+  white-space: nowrap;
+  min-width: 36px;
+}
+
+.bar-chart-value {
+  width: 52px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-align: right;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Color variants */
+.bar-chart-fill-emerald { background: var(--gradient-emerald); }
+.bar-chart-fill-amber   { background: var(--gradient-amber); }
+.bar-chart-fill-rose    { background: var(--gradient-rose); }
+.bar-chart-fill-accent  { background: var(--gradient-accent); }
+
+/* ----------------------------------------
+   HEATMAP (Analytics Page)
+   ---------------------------------------- */
+.heatmap-grid {
+  display: grid;
+  gap: 3px;
+}
+
+.heatmap-axis {
+  display: flex;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+}
+
+.heatmap-axis-x {
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.heatmap-axis-y {
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 4px;
+}
+
+.heatmap-cell {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.4);
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* Heatmap color scale */
+.heatmap-0  { background: rgba(99, 102, 241, 0.05); }
+.heatmap-1  { background: rgba(99, 102, 241, 0.12); }
+.heatmap-2  { background: rgba(99, 102, 241, 0.22); }
+.heatmap-3  { background: rgba(99, 102, 241, 0.35); }
+.heatmap-4  { background: rgba(99, 102, 241, 0.50); }
+.heatmap-5  { background: rgba(99, 102, 241, 0.65); }
+.heatmap-6  { background: rgba(99, 102, 241, 0.80); }
+.heatmap-7  { background: rgba(99, 102, 241, 0.95); }
+.heatmap-8  { background: rgba(139, 92, 246, 1); }
+.heatmap-9  { background: rgba(167, 70, 255, 1); }
+.heatmap-10 { background: rgba(200, 50, 255, 1); }
+
+/* ----------------------------------------
+   RADAR CHART
+   ---------------------------------------- */
+.radar-chart-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ----------------------------------------
+   CHART GRID LINES
+   ---------------------------------------- */
+.chart-grid {
+  stroke: var(--color-border);
+  stroke-dasharray: 4 4;
+  stroke-width: 1;
+  opacity: 0.5;
+}
+
+.chart-grid-major {
+  stroke: var(--color-border-hover);
+  stroke-dasharray: none;
+  stroke-width: 1;
+  opacity: 0.3;
+}
+
+/* ----------------------------------------
+   CHART ZERO LINE
+   ---------------------------------------- */
+.chart-zero-line {
+  stroke: var(--color-border-hover);
+  stroke-width: 1.5;
+}
+
+/* ----------------------------------------
+   AREA GRADIENT DEFINITIONS
+   These are referenced in JS canvas draws via
+   CanvasGradient createLinearGradient
+   ---------------------------------------- */
+.area-purple  { --area-color: rgba(99, 102, 241, 0.15); }
+.area-cyan    { --area-color: rgba(6, 182, 212, 0.12); }
+.area-emerald { --area-color: rgba(16, 185, 129, 0.12); }
+.area-amber   { --area-color: rgba(245, 158, 11, 0.12); }
+.area-rose    { --area-color: rgba(239, 68, 68, 0.12); }
+
+/* ----------------------------------------
+   PIPELINE CANVAS
+   ---------------------------------------- */
+.pipeline-node {
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.pipeline-node:hover {
+  filter: brightness(1.15);
+}
+
+.pipeline-edge {
+  stroke: var(--color-border-hover);
+  stroke-width: 1.5;
+  fill: none;
+  marker-end: url(#arrowhead);
+}
+
+.pipeline-edge-active {
+  stroke: var(--brand-primary);
+  stroke-dasharray: 6 3;
+  animation: pipelineFlow 1s linear infinite;
+}
+
+@keyframes pipelineFlow {
+  from { stroke-dashoffset: 9; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* ----------------------------------------
+   NETWORK I/O CHART
+   ---------------------------------------- */
+.network-chart-container {
+  position: relative;
+}
+
+.network-chart-legend {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: var(--space-md);
+}
+
+.network-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
+.network-legend-line {
+  width: 16px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.network-legend-line-up   { background: #6366f1; }
+.network-legend-line-down { background: #06b6d4; }
+
+/* ----------------------------------------
+   CHART LOADING OVERLAY
+   ---------------------------------------- */
+.chart-loading-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--color-surface), 0.8);
+  backdrop-filter: blur(4px);
+  border-radius: inherit;
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.chart-loading-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ----------------------------------------
+   CHART EMPTY STATE
+   ---------------------------------------- */
+.chart-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-2xl);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.chart-empty-icon {
+  font-size: 32px;
+  opacity: 0.5;
+}
+
+.chart-empty-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.chart-empty-desc {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  max-width: 200px;
+}
+
+/* ----------------------------------------
+   CHART ZOOM CONTROLS
+   ---------------------------------------- */
+.chart-zoom-controls {
+  position: absolute;
+  bottom: var(--space-sm);
+  right: var(--space-sm);
+  display: flex;
+  gap: 2px;
+  background: var(--color-surface-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2px;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.chart-card:hover .chart-zoom-controls {
+  opacity: 1;
+}
+
+.chart-zoom-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  transition: color var(--transition-base), background var(--transition-base);
+}
+
+.chart-zoom-btn:hover {
+  color: var(--color-text-primary);
+  background: var(--color-surface-hover);
+}
+
+/* ----------------------------------------
+   REALTIME INDICATOR
+   ---------------------------------------- */
+.realtime-indicator {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--text-xs);
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.realtime-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-success);
+  animation: pulseDot 1.5s ease-in-out infinite;
+}
+
+/* ----------------------------------------
+   BENCHMARK COMPARISON BARS
+   ---------------------------------------- */
+.benchmark-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.benchmark-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.benchmark-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.benchmark-label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.benchmark-values {
+  display: flex;
+  gap: var(--space-md);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.benchmark-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.benchmark-bar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.benchmark-bar-label {
+  width: 50px;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.benchmark-track {
+  flex: 1;
+  height: 8px;
+  background: var(--color-surface-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.benchmark-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ----------------------------------------
+   CHART COLOR CLASSES
+   ---------------------------------------- */
+.chart-color-1  { color: #6366f1; }
+.chart-color-2  { color: #06b6d4; }
+.chart-color-3  { color: #10b981; }
+.chart-color-4  { color: #f59e0b; }
+.chart-color-5  { color: #ef4444; }
+.chart-color-6  { color: #8b5cf6; }
+.chart-color-7  { color: #ec4899; }
+.chart-color-8  { color: #14b8a6; }
+
+.chart-bg-1  { background: #6366f1; }
+.chart-bg-2  { background: #06b6d4; }
+.chart-bg-3  { background: #10b981; }
+.chart-bg-4  { background: #f59e0b; }
+.chart-bg-5  { background: #ef4444; }
+.chart-bg-6  { background: #8b5cf6; }
+.chart-bg-7  { background: #ec4899; }
+.chart-bg-8  { background: #14b8a6; }
